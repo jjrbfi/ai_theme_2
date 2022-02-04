@@ -1,0 +1,14 @@
+<launch>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find samk_robowar_world)/world/arena.world"/>
+        <arg name="gui" value="true" />
+        <arg name="paused" value="false" />
+        <arg name="verbose" value="true" />
+    </include>
+    
+    <include file="$(find control_2)/launch/spawn_robot1.launch">
+    </include>
+    
+    <include file="$(find control_2)/launch/spawn_robot5.launch">
+    </include>
+</launch>
