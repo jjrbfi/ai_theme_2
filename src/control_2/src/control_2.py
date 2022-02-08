@@ -3,6 +3,7 @@
 import rospy
 import math
 import message_filters
+import random
 
 from nav_msgs.msg import Odometry
 from std_msgs.msg import Float64
@@ -19,13 +20,17 @@ class Control():
         
         robot1_odom_sub = message_filters.Subscriber('/robot1/odometry/filtered', Odometry)
         robot5_odom_sub = message_filters.Subscriber('/robot5/odometry/filtered', Odometry)
-        subscribers = message_filters.ApproximateTimeSynchronizer([robot1_odom_sub, robot5_odom_sub], queue_size=1, slop=0.9,allow_headerless=False)
+        subscribers = message_filters.ApproximateTimeSynchronizer([robot1_odom_sub, robot5_odom_sub], queue_size=10, slop=0.9,allow_headerless=False)
         subscribers.registerCallback(self.callback)
 
-        self.vel_pub_fl = rospy.Publisher('/robot5/wheel_fl_velocity_controller/command', Float64, queue_size=1)
-        self.vel_pub_fr = rospy.Publisher('/robot5/wheel_fr_velocity_controller/command', Float64, queue_size=1)
-        self.vel_pub_bl = rospy.Publisher('/robot5/wheel_bl_velocity_controller/command', Float64, queue_size=1)
-        self.vel_pub_br = rospy.Publisher('/robot5/wheel_br_velocity_controller/command', Float64, queue_size=1)
+        self.vel_pub_fl = rospy.Publisher('/robot5/wheel_fl_velocity_controller/command', Float64, queue_size=10)
+        self.vel_pub_fr = rospy.Publisher('/robot5/wheel_fr_velocity_controller/command', Float64, queue_size=10)
+        self.vel_pub_bl = rospy.Publisher('/robot5/wheel_bl_velocity_controller/command', Float64, queue_size=10)
+        self.vel_pub_br = rospy.Publisher('/robot5/wheel_br_velocity_controller/command', Float64, queue_size=10)
+       
+        self.vel_pub_l = rospy.Publisher('/robot1/wheel_l_velocity_controller/command', Float64, queue_size=10)
+        self.vel_pub_r = rospy.Publisher('/robot1/wheel_r_velocity_controller/command', Float64, queue_size=10)
+
 
         rospy.on_shutdown(self.shutdown)
         while not rospy.is_shutdown():

@@ -23,10 +23,14 @@ if __name__=="__main__":
 
     class robot:
         pass
-    robot.vel_pub_fl = rospy.Publisher('/robot5/wheel_fl_velocity_controller/command', Float64, queue_size=1)
-    robot.vel_pub_fr = rospy.Publisher('/robot5/wheel_fr_velocity_controller/command', Float64, queue_size=1)
-    robot.vel_pub_bl = rospy.Publisher('/robot5/wheel_bl_velocity_controller/command', Float64, queue_size=1)
-    robot.vel_pub_br = rospy.Publisher('/robot5/wheel_br_velocity_controller/command', Float64, queue_size=1)
+    robot.vel_pub_fl = rospy.Publisher('/robot5/wheel_fl_velocity_controller/command', Float64, queue_size=10)
+    robot.vel_pub_fr = rospy.Publisher('/robot5/wheel_fr_velocity_controller/command', Float64, queue_size=10)
+    robot.vel_pub_bl = rospy.Publisher('/robot5/wheel_bl_velocity_controller/command', Float64, queue_size=10)
+    robot.vel_pub_br = rospy.Publisher('/robot5/wheel_br_velocity_controller/command', Float64, queue_size=10)
+    
+    robot.vel_pub_l = rospy.Publisher('/robot1/wheel_l_velocity_controller/command', Float64, queue_size=10)
+    robot.vel_pub_r = rospy.Publisher('/robot1/wheel_r_velocity_controller/command', Float64, queue_size=10)
+    
     try:
         linear_vel, angular_vel = 0, 0
         while True:

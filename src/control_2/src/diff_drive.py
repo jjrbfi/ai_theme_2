@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from std_msgs.msg import Float64
 import rospy
+import random
 
 def diff_drive(control, linear_vel, angular_vel):
     fl = Float64()
@@ -8,6 +9,9 @@ def diff_drive(control, linear_vel, angular_vel):
     bl = Float64()
     br = Float64()
     
+    l = Float64()
+    r = Float64()
+
     linear_vel = linear_vel * -1 # Because the wheel y axis is -1 in the urdf
     angular_vel = angular_vel * -1 # Because the wheel y axis is -1 in the urdf
 
@@ -28,3 +32,7 @@ def diff_drive(control, linear_vel, angular_vel):
     control.vel_pub_fr.publish(fr.data)
     control.vel_pub_bl.publish(bl.data)
     control.vel_pub_br.publish(br.data)
+
+    control.vel_pub_l.publish(random.randint(-15,5))
+    control.vel_pub_r.publish(random.randint(-15,5))
+    
